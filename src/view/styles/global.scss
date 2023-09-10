@@ -1,0 +1,110 @@
+@use 'sass:math';
+
+@import './reset.scss';
+@import './form.scss';
+
+@function pxToRem($value) {
+  $remValue: math.div($value, 16) + rem;
+  @return $remValue;
+}
+
+:root {
+  --accent-color: 182 55% 70%;
+  --primary-color: 230 29% 20%;
+  --white-color: 0 0% 100%;
+
+  --black-1-color: 246 25% 22%;
+  --black-2-color: 220 8% 17%;
+
+  --gray-1-color: 240 3% 45%;
+  --gray-2-color: 240 6% 60%;
+  --gray-3-color: 240 11% 75%;
+  --gray-4-color: 240 21% 86%;
+  --gray-5-color: 207 28% 92%;
+  --gray-6-color: 240 19% 94%;
+  --gray-7-color: 240 29% 97%;
+
+  --red-color: 0 84% 61%;
+  --green-color: 145 63% 42%;
+  --blue-color: 208 79% 51%;
+  --orange-color: 28 92% 53%;
+
+  --primary-text-color: hsl(246, 25%, 22%);
+  --secondary-text-color: hsl(202, 10%, 49%);
+  --main-bg-color: hsl(15deg 100% 91%);
+  --tile-color: hsl(226deg 71% 79% / 33%);
+  --negative-color: red;
+  --option-hover-color: hsl(0, 0%, 96%);
+
+  --border-radius: 12px;
+  --tile-gap: 25px;
+
+  --paragraph-font-size: 14px;
+  --paragraph-line-height: 20px;
+
+  --h1-font-size: #{pxToRem(34)};
+  --h1-line-height: #{pxToRem(48)};
+
+  --h2-font-size: #{pxToRem(29)};
+  --h2-line-height: #{pxToRem(42)};
+
+  --h3-font-size: #{pxToRem(25)};
+  --h3-line-height: #{pxToRem(36)};
+
+  --h4-font-size: #{pxToRem(20)};
+  --h4-line-height: #{pxToRem(32)};
+
+  --h5-font-size: #{pxToRem(18)};
+  --h5-line-height: #{pxToRem(30)};
+
+  --p1-font-size: #{pxToRem(15)};
+  --p1-line-height: #{pxToRem(24)};
+
+  --p2-font-size: #{pxToRem(14)};
+  --p2-line-height: #{pxToRem(23)};
+
+  --p3-font-size: #{pxToRem(13)};
+  --p3-line-height: #{pxToRem(23)};
+
+  --p4-font-size: #{pxToRem(12)};
+  --p4-line-height: #{pxToRem(18)};
+
+  --p5-font-size: #{pxToRem(11)};
+  --p5-line-height: #{pxToRem(19)};
+
+  --p6-font-size: #{pxToRem(10)};
+  --p6-line-height: #{pxToRem(16)};
+
+  --caption-font-size: 12px;
+  --caption-line-height: 16px;
+
+  --input-small-height: 1.8rem;
+  --input-medium-height: 2.6rem;
+  --input-large-height: 3.3rem;
+
+  --input-inline-padding: 1.18rem;
+  --input-textarea-vertical-padding: 1rem;
+  --input-icon-size: 1.25rem;
+  --input-icon-margin: 0.56rem;
+}
+
+body {
+  width: 100%;
+  min-width: 1080px;
+  font-family: system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 400;
+  font-size: var(--paragraph-font-size);
+  line-height: var(--paragraph-line-height);
+  color: var(--primary-text-color);
+  background-color: var(--main-bg-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: hsl(0deg 0% 9%);
+  }
+}
+
+.bookmark {
+
+}

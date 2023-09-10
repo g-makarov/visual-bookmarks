@@ -1,0 +1,124 @@
+.button {
+  position: relative;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  justify-content: center;
+
+  transition: background-color 0.2s ease-in-out, opacity 0.1s;
+
+  &:not(&--only-icon) {
+    padding-inline: 1rem;
+  }
+
+  &--full {
+    width: 100%;
+  }
+
+  &--primary {
+    background-color: hsl(var(--accent-color));
+    color: hsl(var(--black-1-color));
+  }
+
+  &--secondary {
+    background-color: hsl(var(--gray-7-color));
+  }
+
+  &--negative {
+    background-color: hsl(var(--red-color));
+    color: hsl(var(--white-color));
+  }
+
+  &[disabled] {
+    cursor: default;
+  }
+
+  &--disabled {
+    background-color: hsl(var(--gray-6-color));
+    opacity: 0.6;
+    color: hsl(var(--black-1-color));
+    cursor: not-allowed !important;
+  }
+
+  &--size-small {
+    font-size: var(--p5-font-size);
+    line-height: var(--p5-line-height);
+    height: var(--input-small-height);
+  }
+
+  &--size-medium {
+    font-size: var(--p5-font-size);
+    line-height: var(--p5-line-height);
+    height: var(--input-medium-height);
+  }
+
+  &--size-large {
+    font-size: var(--p3-font-size);
+    line-height: var(--p3-line-height);
+    height: var(--input-large-height);
+  }
+
+  $buttonRef: &;
+
+  &--size-small {
+    &#{$buttonRef}--only-icon {
+      width: var(--input-small-height);
+    }
+  }
+
+  &--size-medium {
+    &#{$buttonRef}--only-icon {
+      width: var(--input-medium-height);
+    }
+  }
+
+  &--size-large {
+    &#{$buttonRef}--only-icon {
+      width: var(--input-large-height);
+    }
+  }
+
+  &:hover,
+  &:active {
+    opacity: 0.8;
+  }
+
+  &__loader {
+    position: absolute;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+
+    &--hidden {
+      opacity: 0;
+    }
+  }
+
+  &__count {
+    border-radius: 50px;
+    font-size: var(--p5-font-size);
+    display: inline-block;
+    line-height: 1;
+    padding: 2px 7px;
+  }
+
+  &--primary &__count {
+    color: hsl(var(--accent-color));
+    background-color: hsl(var(--white-color));
+  }
+
+  &--negative &__count {
+    color: hsl(var(--red-color));
+    background-color: hsl(var(--white-color));
+  }
+
+  &--secondary &__count {
+    background-color: hsl(var(--accent-color));
+    color: hsl(var(--white-color));
+  }
+}

@@ -1,0 +1,107 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__inline-fields {
+    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, calc((100% / 2) - 0.5rem));
+  }
+
+  &__field {
+    width: 100%;
+  }
+
+  &__field-row {
+    & ~ & {
+      margin-top: 10px;
+    }
+  }
+
+  &__field-row &__field-row {
+    margin-top: 0;
+  }
+
+  &__label {
+    display: block;
+    font-size: var(--p4-font-size);
+    line-height: var(--p4-line-height);
+    color: hsl(var(--gray-1-color));
+    margin-bottom: 2px;
+  }
+
+  &__inline-fields &__label {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__input {
+    font-size: var(--p4-font-size);
+    line-height: var(--p4-line-height);
+    padding-inline: var(--input-inline-padding);
+    border: 1px solid hsl(var(--gray-5-color));
+    border-radius: 0.37rem;
+    width: 100%;
+    background-color: hsl(var(--white-color));
+
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
+
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    &[readonly] {
+      cursor: pointer;
+    }
+
+    &[disabled] {
+      background-color: hsl(var(--gray-7-color));
+      color: hsl(var(--gray-3-color));
+      cursor: not-allowed;
+    }
+
+    &--size-medium {
+      height: var(--input-medium-height);
+    }
+
+    &--size-large {
+      height: var(--input-large-height);
+    }
+
+    &--error {
+      border-color: hsl(var(--red-color));
+    }
+
+    &:focus {
+      border-color: hsl(var(--gray-3-color));
+    }
+
+    &::placeholder {
+      color: hsl(var(--gray-3-color));
+    }
+  }
+
+  &__textarea {
+    padding-block: var(--input-textarea-vertical-padding);
+    height: 6.5rem;
+    resize: none;
+  }
+
+  &__error {
+    font-size: var(--p4-font-size);
+    line-height: var(--p4-line-height);
+    color: hsl(var(--red-color));
+    margin-top: 3px;
+  }
+}

@@ -1,0 +1,19 @@
+.menu {
+  position: fixed;
+  background: #ffffff;
+  z-index: 100;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 130px;
+  padding: 5px 0;
+
+  &__option {
+    padding: 9px 12px;
+    font-weight: 500;
+    font-size: 14px;
+
+    &:hover {
+      background: hsl(var(--gray-5-color));
+    }
+  }
+}

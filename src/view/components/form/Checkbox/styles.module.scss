@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  transition: background-color 0.2s, border-color 0.2s;
+  border: 1px solid hsl(var(--gray-4-color));
+  border-radius: 3px;
+
+  background-color: hsl(var(--white-color));
+
+  &__icon {
+    transition: opacity 0.2s, transform 0.2s;
+    transform: scale(0);
+    opacity: 0;
+    color: hsl(var(--white-color));
+  }
+}
+
+.input {
+  display: none;
+  opacity: 0;
+
+  &:checked ~ .square {
+    border: 1px solid hsl(var(--green-color));
+    background-color: hsl(var(--green-color));
+  }
+
+  &:checked ~ .square .square__icon {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.label {
+  margin-left: 0.5rem;
+  word-break: break-word;
+}

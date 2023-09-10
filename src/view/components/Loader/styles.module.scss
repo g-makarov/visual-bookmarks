@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.dot {
+  content: '';
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: scale 1.2s infinite ease-in-out both;
+  margin: 3px;
+}
+
+.container--colorful .dot {
+  background-color: hsl(var(--accent-color));
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes scale {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

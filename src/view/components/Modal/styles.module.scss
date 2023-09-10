@@ -1,0 +1,110 @@
+.modal-overlay {
+  background-color: hsl(var(--black-1-color) / 60%);
+  z-index: 999;
+  overflow-y: auto;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.modal {
+  --content-padding-x: 30px;
+  --content-padding-y: 25px;
+
+  position: relative;
+  height: fit-content;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+  width: 35%;
+  overflow: hidden;
+
+  $modal: &;
+
+  &__buttons-list {
+    gap: 1rem;
+  }
+
+  &__title {
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
+    font-weight: 700;
+  }
+
+  &__description {
+    font-size: var(--p5-font-size);
+    line-height: var(--p5-line-height);
+    color: hsl(var(--gray-2-color))
+  }
+
+  &--center {
+    margin: auto;
+    border-radius: 8px;
+    padding: var(--content-padding-y) var(--content-padding-x);
+
+    #{$modal}__close-btn {
+      top: 0.625rem;
+      right: 0.625rem;
+      position: absolute;
+    }
+
+    #{$modal}__header-content {
+      margin-bottom: 0.625rem;
+    }
+
+    #{$modal}__buttons-list {
+      margin-top: var(--content-padding-y);
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &--right {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    height: 100vh;
+
+    #{$modal}__close-btn {
+      border-radius: 0.25rem;
+      background-color: hsl(var(--gray-7-color));
+      padding: 0.5rem;
+      border: 1px solid hsl(var(--gray-6-color));
+      margin-right: 1rem;
+    }
+
+    #{$modal}__title {
+      font-size: var(--p2-font-size);
+      line-height: var(--p2-line-height);
+      font-weight: 600;
+    }
+
+    #{$modal}__header {
+      display: flex;
+      align-items: center;
+      min-height: 5rem;
+      border-bottom: 1px solid hsl(var(--gray-6-color));
+      padding: 1.25rem;
+    }
+
+    #{$modal}__buttons-list {
+      padding-inline: 1.25rem;
+      padding-bottom: 1.25rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #{$modal}__content {
+      overflow: auto;
+      padding: 1.25rem;
+    }
+  }
+
+  &__button {
+    width: auto;
+    padding-inline: 2.5rem !important;
+  }
+}
+
+.react-modal-opened {
+  overflow: hidden;
+}
