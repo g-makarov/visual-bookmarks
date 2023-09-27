@@ -10,6 +10,7 @@ interface UserSettings {
   };
 }
 
+// todo
 export const $settings = createStore<UserSettings>({
   theme: 'system',
   colors: {

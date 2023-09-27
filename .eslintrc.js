@@ -109,14 +109,6 @@ module.exports = {
     // immer uses reassign
     'no-param-reassign': 'off',
 
-    // use aliases instead of relative paths
-    'no-restricted-imports': [
-      'error',
-      {
-        patterns: ['../*'],
-      },
-    ],
-
     // use optional chaining instead
     '@typescript-eslint/no-non-null-assertion': 'error',
 

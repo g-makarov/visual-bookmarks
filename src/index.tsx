@@ -5,7 +5,7 @@ import 'react-nested-dropdown/dist/styles.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { App } from './view/components/App';
+import { App } from './view/components/app';
 
 export const CONTAINER_SELECTOR = 'root';
 

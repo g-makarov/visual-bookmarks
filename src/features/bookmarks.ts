@@ -38,5 +38,3 @@ export const $bookmarksSettings = createStore<
 }));
 
 persist({ store: $bookmarksSettings, key: 'bookmarksSettings' });
-
-$bookmarksSettings.watch(state => console.log('$bookmarksSettings: ', state));
