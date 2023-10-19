@@ -11,11 +11,18 @@ import { ChromeBookmarks } from '~/services/ChromeBookmarks';
 const formSchema = z
   .object({
     name: z.string().min(1, formErrors.REQUIRED),
-    url: z.string().url('Invalid link'),
+    url: z.string(),
     customLogoUrl: z.string(),
     isFolder: z.boolean(),
   })
   .superRefine((data, ctx) => {
+    if (!data.isFolder && !z.string().url().safeParse(data.url).success) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Invalid link',
+        path: ['url'],
+      });
+    }
     if (!data.isFolder && !data.url) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
