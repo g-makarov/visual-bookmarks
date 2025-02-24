@@ -1,9 +1,17 @@
-import React, { FC, useMemo } from 'react';
-import { Dropdown, DropdownItem } from 'react-nested-dropdown';
+import { ArrowLeftIcon, EditIcon, MoreVerticalIcon, PlusIcon } from 'lucide-react';
+import React, { type FC } from 'react';
 
-import styles from '~/view/components/bookmarks/styles.module.scss';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '~/components/ui/dropdown-menu';
+import { SettingsModal } from '~/view/components/settings-modal';
 import { Button } from '~/view/components/ui/button';
+import { Modal } from '~/view/components/ui/modal';
 import { SearchInput } from '~/view/components/ui/search-input';
+import { useSwitchValue } from '~/view/hooks/useSwitchValue';
 
 interface Props {
   prev: () => void;
@@ -15,18 +23,15 @@ interface Props {
 }
 
 export const Header: FC<Props> = ({ prev, path, add, onSearch, searchValue, isSearchMode }) => {
-  const dropdownItems: DropdownItem[] = useMemo(
-    () => [{ label: 'Add new bookmark', onSelect: add }],
-    [add],
-  );
+  const { value: isSettingsOpen, on: openSettings, off: closeSettings } = useSwitchValue(false);
 
   return (
-    <div className={styles['header']}>
+    <div className="relative my-10 flex w-full items-center gap-2">
       <Button
-        withIcon="back"
+        icon={ArrowLeftIcon}
         onClick={prev}
         disabled={path.length === 0}
-        className={styles['header__back-btn']}
+        className="w-12 p-0"
         variant="primary"
         size="large"
       />
@@ -40,24 +45,36 @@ export const Header: FC<Props> = ({ prev, path, add, onSearch, searchValue, isSe
         inputSize="large"
       />
       <Button
-        withIcon="add"
+        icon={PlusIcon}
         onClick={add}
         variant="primary"
-        className={styles['header__add-btn']}
+        className="w-12 p-0"
         disabled={isSearchMode}
         size="large"
       />
-      <Dropdown items={dropdownItems}>
-        {({ onClick }) => (
-          <Button
-            withIcon="more"
-            onClick={onClick}
-            variant="primary"
-            size="large"
-            className={styles['header__add-btn']}
-          />
-        )}
-      </Dropdown>
+      <Button
+        icon={MoreVerticalIcon}
+        variant="primary"
+        size="large"
+        className="w-12 p-0"
+        onClick={openSettings}
+      />
+      {isSettingsOpen && <SettingsModal isOpen={isSettingsOpen} close={closeSettings} />}
+      {/* <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Button icon={MoreVerticalIcon} variant="primary" size="large" className="w-12 p-0" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent side="bottom" align="end">
+          <DropdownMenuItem>
+            <PlusIcon />
+            <span>Add new bookmark</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <EditIcon />
+            <span>Edit</span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu> */}
     </div>
   );
 };

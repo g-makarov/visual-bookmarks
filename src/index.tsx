@@ -1,6 +1,5 @@
 import './view/styles/tailwind.scss';
 import './view/styles/global.scss';
-import 'react-nested-dropdown/dist/styles.css';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';

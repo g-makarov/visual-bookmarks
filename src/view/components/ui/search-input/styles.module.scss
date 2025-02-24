@@ -1,6 +1,6 @@
 .search-input {
   --text-input-x-padding: 1.18rem;
-  --icon-size: 1.24rem;
+  --icon-size: 1.4rem;
 
   position: relative;
 
@@ -17,5 +17,6 @@
 
   &__input {
     padding-left: calc(var(--text-input-x-padding) + var(--icon-size) + 0.61rem);
+    font-size: 1rem;
   }
 }

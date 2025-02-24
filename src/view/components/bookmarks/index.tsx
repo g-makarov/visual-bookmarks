@@ -1,7 +1,7 @@
-import { DndContext, DragStartEvent, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { DragEndEvent } from '@dnd-kit/core/dist/types';
+import { DndContext, MouseSensor, useSensor, useSensors, type DragStartEvent } from '@dnd-kit/core';
+import { type DragEndEvent } from '@dnd-kit/core/dist/types';
 import { arrayMove, rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, type FC } from 'react';
 
 import { BookmarkFormModal } from '~/view/components/bookmark-form-modal';
 import { useBookmarksSearch } from '~/view/components/bookmarks/hooks/useBookmarksSearch';
@@ -108,20 +108,20 @@ export const Bookmarks: FC<Props> = ({ rootNode }) => {
         searchValue={searchValue}
         isSearchMode={isSearchMode}
       />
+      {isSearchMode && searchResults.length === 0 && (
+        <p className={styles['no-results']}>No results found</p>
+      )}
       <div className={styles['bookmarks-list']}>
         {isSearchMode &&
-          (searchResults.length > 0 ? (
-            searchResults.map((bookmark, index) => (
-              <Bookmark
-                key={bookmark.id}
-                data={bookmark}
-                next={next}
-                index={index}
-                hotkeyDisabled={isAddModalOpen}
-              />
-            ))
-          ) : (
-            <p className={styles['no-results']}>No results found</p>
+          searchResults.length > 0 &&
+          searchResults.map((bookmark, index) => (
+            <Bookmark
+              key={bookmark.id}
+              data={bookmark}
+              next={next}
+              index={index}
+              hotkeyDisabled={isAddModalOpen}
+            />
           ))}
         {!isSearchMode && (
           <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
@@ -143,11 +143,13 @@ export const Bookmarks: FC<Props> = ({ rootNode }) => {
           </DndContext>
         )}
       </div>
-      <BookmarkFormModal
-        isOpen={isAddModalOpen}
-        close={closeAddModal}
-        folderId={currentBookmarkNode.id}
-      />
+      {isAddModalOpen && (
+        <BookmarkFormModal
+          isOpen={isAddModalOpen}
+          close={closeAddModal}
+          folderId={currentBookmarkNode.id}
+        />
+      )}
     </div>
   );
 };

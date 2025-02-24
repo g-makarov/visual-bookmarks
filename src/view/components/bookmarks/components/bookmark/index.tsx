@@ -2,9 +2,15 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import clsx from 'clsx';
 import { useStoreMap } from 'effector-react';
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FolderIcon } from 'lucide-react';
+import React, { useCallback, useEffect, useState, type FC } from 'react';
 
-import { $bookmarksSettings, BookmarkSettings, removeBookmark } from '~/features/bookmarks';
+import {
+  $bookmarksSettings,
+  createTab,
+  removeBookmark,
+  type BookmarkSettings,
+} from '~/features/bookmarks';
 import { ChromeBookmarks } from '~/services/ChromeBookmarks';
 import { createLogoUrl } from '~/utils/createLogoUrl';
 import { preloadImage } from '~/utils/preloadImage';
@@ -122,7 +128,7 @@ export const Bookmark: FC<BookmarkProps> = ({ data, next, index, hotkeyDisabled 
               )}
             </div>
           )}
-          {isFolder && <Icon name="folder" className={styles['bookmark__folder-icon']} size={24} />}
+          {isFolder && <FolderIcon className={styles['bookmark__folder-icon']} size={24} />}
         </div>
         <div className={styles['bookmark__title']}>{data.title}</div>
         {points && (
@@ -135,6 +141,10 @@ export const Bookmark: FC<BookmarkProps> = ({ data, next, index, hotkeyDisabled 
                 label: 'Edit',
                 onClick: openEditModal,
               },
+              // {
+              //   label: 'Turn into tab',
+              //   onClick: () => createTab(data.id),
+              // },
               { label: 'Delete', onClick: handleRemoveClick },
             ]}
           />

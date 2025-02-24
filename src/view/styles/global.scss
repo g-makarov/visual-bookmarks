@@ -1,7 +1,7 @@
 @use 'sass:math';
 
-@import './reset.scss';
-@import './form.scss';
+@use './reset.scss';
+@use './form.scss';
 
 @function pxToRem($value) {
   $remValue: math.div($value, 16) + rem;
@@ -97,17 +97,13 @@ body {
   line-height: var(--paragraph-line-height);
   color: var(--primary-text-color);
   background-color: var(--main-bg-color);
-  background-image: url('~/view/assets/images/layered-waves-haikei.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-image: url('~/view/assets/images/layered-waves-haikei.svg');
+  // background-repeat: no-repeat;
+  // background-size: cover;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --main-bg-color: hsl(0deg 0% 9%);
   }
-}
-
-.bookmark {
-
 }

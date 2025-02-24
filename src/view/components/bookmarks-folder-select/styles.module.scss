@@ -1,0 +1,9 @@
+.list__item {
+  padding: 2px 6px;
+  border-radius: 4px;
+
+  &--active {
+    background-color: hsl(var(--accent-color));
+    color: hsl(var(--black-1-color));
+  }
+}

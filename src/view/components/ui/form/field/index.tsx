@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import React, { ReactNode } from 'react';
-import { FieldError } from 'react-hook-form';
+import React, { type ReactNode } from 'react';
+import { type FieldError } from 'react-hook-form';
 
 import { FieldErrorMessage } from '~/view/components/ui/form/field-error-message';
 
@@ -11,14 +11,14 @@ export interface FieldProps {
   children: ReactNode;
   labelClassName?: string;
   childrenClassName?: string;
-  required?: boolean;
+  optional?: boolean;
 }
 
 export const Field: React.FC<FieldProps> = ({
   label,
   error,
   className,
-  required,
+  optional,
   children,
   labelClassName,
   childrenClassName,
@@ -26,10 +26,9 @@ export const Field: React.FC<FieldProps> = ({
   return (
     <div className={clsx('form__field', 'form__field-row', className)}>
       {label && (
-        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className={clsx('form__label', labelClassName)} title={label}>
           {label}
-          {required ? ' *' : null}
+          {optional ? ' (optional)' : null}
         </label>
       )}
       <div className={childrenClassName}>{children}</div>

@@ -18,28 +18,6 @@
   padding-inline: 40px;
 }
 
-.header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-  margin-top: 40px;
-  width: 100%;
-  gap: 10px;
-
-  &__back-btn,
-  &__add-btn {
-    padding: 0;
-    width: 50px;
-  }
-
-  &__back-btn {
-  }
-
-  &__add-btn {
-  }
-}
-
 .no-results {
   font-size: 1.5rem;
   font-weight: 600;

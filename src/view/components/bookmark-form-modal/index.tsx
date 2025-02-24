@@ -2,11 +2,12 @@ import { useStoreMap } from 'effector-react';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
-import { $bookmarksSettings, BookmarkSettings } from '~/features/bookmarks';
+import { $bookmarksSettings, type BookmarkSettings } from '~/features/bookmarks';
 import { ChromeBookmarks } from '~/services/ChromeBookmarks';
 import { createLogoUrl } from '~/utils/createLogoUrl';
 import { preloadImage } from '~/utils/preloadImage';
 import { BookmarkTilePreview } from '~/view/components/bookmark-tile-preview';
+import { BookmarksFolderSelect } from '~/view/components/bookmarks-folder-select';
 import { Checkbox } from '~/view/components/ui/form/checkbox';
 import { Field } from '~/view/components/ui/form/field';
 import { TextField } from '~/view/components/ui/form/text-field';
@@ -42,6 +43,7 @@ export const BookmarkFormModal: React.FC<Props> = ({ isOpen, close, folderId, bo
     onSubmitSuccessful: close,
   });
 
+  const newFolderId = form.watch('newFolderId');
   const isFolder = form.watch('isFolder');
   const isEditMode = !!bookmark;
 
@@ -52,6 +54,7 @@ export const BookmarkFormModal: React.FC<Props> = ({ isOpen, close, folderId, bo
         url: bookmark.url ?? '',
         customLogoUrl: settings?.logoUrl ?? '',
         isFolder: ChromeBookmarks.isFolder(bookmark),
+        newFolderId: bookmark.parentId,
       });
     }
 
@@ -125,39 +128,45 @@ export const BookmarkFormModal: React.FC<Props> = ({ isOpen, close, folderId, bo
           autoComplete={false}
           disabled={isFolder}
         />
-        <div className="mt-4">
-          <Field label="Bookmark logo">
-            <div className="flex gap-2 mt-2">
+        <Field label="Bookmark logo">
+          <div className="mt-2 flex gap-2">
+            <div className="flex flex-col items-center">
+              <BookmarkTilePreview
+                highlighted={selectedLogo === 'default'}
+                onClick={() => setSelectedLogo('default')}
+                logo={defaultLogo}
+                name={name}
+              />
+              <div className={styles['preview-tile-badge']}>Default</div>
+            </div>
+            {customLogo && (
               <div className="flex flex-col items-center">
                 <BookmarkTilePreview
-                  highlighted={selectedLogo === 'default'}
-                  onClick={() => setSelectedLogo('default')}
-                  logo={defaultLogo}
+                  highlighted={selectedLogo === 'custom'}
+                  onClick={() => setSelectedLogo('custom')}
+                  logo={customLogo}
                   name={name}
                 />
-                <div className={styles['preview-tile-badge']}>Default</div>
+                <div className={styles['preview-tile-badge']}>Custom</div>
               </div>
-              {customLogo && (
-                <div className="flex flex-col items-center">
-                  <BookmarkTilePreview
-                    highlighted={selectedLogo === 'custom'}
-                    onClick={() => setSelectedLogo('custom')}
-                    logo={customLogo}
-                    name={name}
-                  />
-                  <div className={styles['preview-tile-badge']}>Custom</div>
-                </div>
-              )}
-            </div>
-          </Field>
-          <TextField
-            control={form.control}
-            label="Custom logo link"
-            name="customLogoUrl"
-            autoComplete={false}
-            disabled={isFolder}
+            )}
+          </div>
+        </Field>
+        <TextField
+          control={form.control}
+          label="Custom logo link"
+          name="customLogoUrl"
+          autoComplete={false}
+          disabled={isFolder}
+          optional
+        />
+        <Field label="Folder">
+          <BookmarksFolderSelect
+            onSelect={id => form.setValue('newFolderId', id)}
+            selected={newFolderId}
+            className="mt-4"
           />
-        </div>
+        </Field>
       </div>
     </Modal>
   );

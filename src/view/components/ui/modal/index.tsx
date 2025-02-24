@@ -1,9 +1,10 @@
 import clsx from 'clsx';
+import { XIcon } from 'lucide-react';
 import * as React from 'react';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import ReactModal from 'react-modal';
 
-import { Button, ButtonProps } from '~/view/components/ui/button';
+import { Button, type ButtonProps } from '~/view/components/ui/button';
 import { Icon } from '~/view/components/ui/icon';
 
 import styles from './styles.module.scss';
@@ -92,7 +93,7 @@ export const Modal: React.FC<ModalProps> = ({
         <div className={styles['modal__header']}>
           {withCloseButton && (
             <button type="button" className={styles['modal__close-btn']} onClick={close}>
-              <Icon name="close" size={20} />
+              <XIcon size={20} />
             </button>
           )}
           {Boolean(title || description) && (

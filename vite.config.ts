@@ -4,8 +4,7 @@ import * as path from 'path';
 import { checker } from 'vite-plugin-checker';
 import { svgSpritemap } from 'vite-plugin-svg-spritemap';
 
-export default defineConfig(({ mode }) => {
-  return {
+export default defineConfig({
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
@@ -24,5 +23,4 @@ export default defineConfig(({ mode }) => {
         filename: 'icons/spritemap.svg',
       }),
     ],
-  };
-});
+  });

@@ -3,9 +3,9 @@ import React, { ChangeEvent, FC } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { InputSize, TextInput } from '~/view/components/ui/form/text-input';
-import { Icon } from '~/view/components/ui/icon';
 
 import styles from './styles.module.scss';
+import { SearchIcon } from 'lucide-react';
 
 export interface SearchInputProps {
   onChange: (value: string) => void;
@@ -39,7 +39,7 @@ export const SearchInput: FC<SearchInputProps> = ({
         defaultValue={defaultValue}
         size={inputSize}
       />
-      <Icon name="magnifier" className={styles['search-input__icon']} />
+      <SearchIcon className={styles['search-input__icon']} />
     </div>
   );
 };

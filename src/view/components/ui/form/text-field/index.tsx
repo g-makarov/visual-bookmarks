@@ -1,14 +1,19 @@
 import * as React from 'react';
-import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
+import {
+  useController,
+  type Control,
+  type FieldPathByValue,
+  type FieldValues,
+} from 'react-hook-form';
 
-import { Field, FieldProps } from '~/view/components/ui/form/field';
-import { TextInput, TextInputProps } from '~/view/components/ui/form/text-input';
+import { Field, type FieldProps } from '~/view/components/ui/form/field';
+import { TextInput, type TextInputProps } from '~/view/components/ui/form/text-input';
 
 type AllowedInputProps = Pick<
   TextInputProps,
   'autoComplete' | 'autoFocus' | 'size' | 'placeholder' | 'maxLength' | 'disabled'
 >;
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
+type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'optional'>;
 
 export interface TextFieldProps<
   TFormValues extends FieldValues,
@@ -30,14 +35,14 @@ export const TextField = <
   control,
   label,
   className,
-  required,
   placeholder,
+  optional,
   ...textInputProps
 }: TextFieldProps<TFormValues, TName>): React.ReactElement => {
   const controller = useController({ name, control });
 
   return (
-    <Field {...{ className, label, required }} error={controller.fieldState.error}>
+    <Field {...{ className, label, optional }} error={controller.fieldState.error}>
       <TextInput
         {...controller.field}
         error={!!controller.fieldState.error}

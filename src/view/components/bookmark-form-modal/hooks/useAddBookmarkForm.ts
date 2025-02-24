@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback, useMemo } from 'react';
-import { useForm, UseFormHandleSubmit, UseFormReturn } from 'react-hook-form';
+import { useForm, type UseFormHandleSubmit, type UseFormReturn } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
 
@@ -14,6 +14,7 @@ const formSchema = z
     url: z.string(),
     customLogoUrl: z.string(),
     isFolder: z.boolean(),
+    newFolderId: z.string(),
   })
   .superRefine((data, ctx) => {
     if (!data.isFolder && !z.string().url().safeParse(data.url).success) {
@@ -51,6 +52,7 @@ const defaultValues: AddBookmarkFormValues = {
   url: '',
   customLogoUrl: '',
   isFolder: false,
+  newFolderId: '',
 };
 
 interface UseAddBookmarkFormProps {
@@ -67,7 +69,7 @@ export function useAddBookmarkForm({
   onSubmitSuccessful,
 }: UseAddBookmarkFormProps): UseAddBookmarkFormReturn {
   const form = useForm<AddBookmarkFormValues>({
-    defaultValues,
+    defaultValues: folderId ? { ...defaultValues, newFolderId: folderId } : defaultValues,
     mode: 'onChange',
     resolver: zodResolver(formSchema),
   });
@@ -83,6 +85,9 @@ export function useAddBookmarkForm({
             title: values.name,
             url: isFolder ? undefined : values.url,
           });
+
+          await chrome.bookmarks.move(bookmark.id, { parentId: values.newFolderId });
+
           if (selectedLogo === 'custom' && values.customLogoUrl) {
             updateBookmarkSettings({
               id: bookmark.id,
@@ -95,7 +100,7 @@ export function useAddBookmarkForm({
           const newBookmark = await ChromeBookmarks.create({
             title: values.name,
             url: isFolder ? undefined : values.url,
-            parentId: folderId,
+            parentId: values.newFolderId,
           });
           if (selectedLogo === 'custom' && values.customLogoUrl) {
             updateBookmarkSettings({
@@ -113,7 +118,7 @@ export function useAddBookmarkForm({
         console.error(e);
       }
     },
-    [form, isEditMode, onSubmitSuccessful, bookmark, isFolder, selectedLogo, folderId],
+    [isEditMode, onSubmitSuccessful, bookmark, isFolder, selectedLogo, folderId],
   );
 
   return useMemo(

@@ -1,7 +1,6 @@
 import clsx from 'clsx';
+import { CheckIcon } from 'lucide-react';
 import React, { useId } from 'react';
-
-import { Icon } from '~/view/components/ui/icon';
 
 import styles from './styles.module.scss';
 
@@ -25,7 +24,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           {...inputProps}
         />
         <div className={styles['square']}>
-          <Icon name="check" size={18} className={styles['square__icon']} />
+          <CheckIcon className={styles['square__icon']} size={16} />
         </div>
         {label && <p className={styles['label']}>{label}</p>}
       </label>
